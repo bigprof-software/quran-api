@@ -3,7 +3,7 @@
 # This script accepts a dir path as an argument and then:
 # 1. Creates 114 new directories in the specified directory named "1" through "114", corresponding to the 114 chapters in the Quran.
 # 2. Inside each of the 114 directories, it creates directories named "1" through "n" where n is the number of verses in that chapter.
-# 3. Inside each verse directory, it creates an empty file named index.json.
+# 3. Inside each verse directory, it creates an empty file named index.txt.
 
 # Check if the user has provided a directory path
 if [ -z "$1" ]; then
@@ -29,8 +29,15 @@ for i in {1..114}; do
     # create directories named "1" through "n" where n is the number of verses in that chapter
     for j in $(seq 1 ${verses[$i-1]}); do
         mkdir -p "$base_dir/$i/$j"
-        # create an empty file named index.json in each verse directory
-        touch "$base_dir/$i/$j/index.json"
+        # create an empty file named index.txt in each verse directory
+        touch "$base_dir/$i/$j/index.txt"
+
+        # if $base_dir ends with 'ar', then create a subdirectory named 'diacritized' in each verse directory
+        # and create an empty file named index.txt in the 'diacritized' directory
+        if [[ $base_dir == *ar ]]; then
+            mkdir -p "$base_dir/$i/$j/diacritized"
+            touch "$base_dir/$i/$j/diacritized/index.txt"
+        fi
     done
 done
 
