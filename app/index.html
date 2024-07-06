@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quran Finder API</title>
+	<!-- responsive meta tag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f5f5f5;
+			line-height: 1.6;
+		}
+		.container {
+			width: 80%;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		h1 {
+			color: #333;
+			font-size: 32px;
+		}
+		h2 {
+			color: #333;
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+		h3 {
+			color: #333;
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+		h4 {
+			color: #333;
+			font-size: 16px;
+			margin-bottom: 10px;
+		}
+		code {
+			background-color: #f9f9f9;
+			padding: 2px 5px;
+			border-radius: 5px;
+			font-size: 14px;
+			color: #333;
+		}
+		p {
+			color: #666;
+		}
+		.api {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			margin-top: 20px;
+		}
+		.api h2 {
+			color: #333;
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+		.api p {
+			color: #666;
+			font-size: 16px;
+		}
+		.api pre {
+			background-color: #f9f9f9;
+			padding: 10px;
+			border-radius: 5px;
+			font-size: 14px;
+			color: #333;
+			overflow-x: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Quran Finder API</h1>
+		<p>Quran Finder API is a simple API to get the verses of the Quran.</p>
+		<div class="api">
+			<h2>Get a verse by Surah and Ayah</h2>
+			<p>Get a verse by its Surah number and Ayah number in the specified language.</p>
+			<pre>GET text/{lang}/{suraNum}/{ayaNum}/</pre>
+
+			<h3>Parameters</h3>
+			<ul>
+				<li><code>{lang}</code> is the two-letter language code (<code>en</code> for English, <code>ar</code> for Arabic, etc.). Only <code>ar</code> is supported at the moment. More languages will be added in the future.</li>
+				<li><code>{suraNum}</code> is the Surah number (1-114).</li>
+				<li><code>{ayaNum}</code> is the Ayah number.</li>
+			</ul>
+
+			<h3>Response</h3>
+			<p>The response is a plain text of the verse in the specified language. If the verse is not found (e.g. invalid Surah number or Ayah number, or language code not supported), the response will be an empty string,
+				along with a 404 status code.</p>
+
+			<h3>Example</h3>
+			<pre>GET /text/ar/1/1</pre>
+
+			<h4>Response</h4>
+			<pre>بسم الله الرحمن الرحيم</pre>
+
+			<p><a href="https://api.quran-finder.com/text/ar/1/1" target="_blank">Try it now</a></p>
+		</div>
+		<div class="api">
+			<h2>Get a diacritized verse by Surah and Ayah</h2>
+			<p>Get a diacritized verse by its Surah number and Ayah number in the specified language. Only Arabic is supported for diacritized verses.</p>
+			<pre>GET text/{lang}/{suraNum}/{ayaNum}/diacritized/</pre>
+
+			<h3>Parameters</h3>
+			<p>Same as the previous endpoint (<code>GET text/{lang}/{suraNum}/{ayaNum}/</code>).</p>
+
+			<h3>Response</h3>
+			<p>The response is a plain text of the diacritized verse in Arabic. If the verse is not found (e.g. invalid Surah number or Ayah number, or language code not supported), the response will be an empty string,
+				along with a 404 status code.</p>
+
+			<h3>Example</h3>
+			<pre>GET /text/ar/1/1/diacritized/</pre>
+
+			<h4>Response</h4>
+			<pre>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</pre>
+
+			<p><a href="https://api.quran-finder.com/text/ar/1/1/diacritized/" target="_blank">Try it now</a></p>
+		</div>
+	</div>
+</html>
